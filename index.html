@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Calculator</title>
+    <link rel="icon" href="icon.jpg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <form name="calculator">
+            <h1>Calculator</h1>
+            <input class="display" type="text" name="input" maxlength="15" readonly>
+            <div class="buttons">
+                <button type="button" class="clear" onclick="clearInput()">C</button>
+                <button type="button" onclick="backspace()">⌫</button>
+                <button type="button" onclick="updateInput('/')">/</button>
+                <button type="button" onclick="updateInput('*')">*</button>
+                
+                <button type="button" onclick="updateInput('7')">7</button>
+                <button type="button" onclick="updateInput('8')">8</button>
+                <button type="button" onclick="updateInput('9')">9</button>
+                <button type="button" onclick="updateInput('-')">-</button>
+                
+                <button type="button" onclick="updateInput('4')">4</button>
+                <button type="button" onclick="updateInput('5')">5</button>
+                <button type="button" onclick="updateInput('6')">6</button>
+                <button type="button" onclick="updateInput('+')">+</button>
+                
+                <button type="button" onclick="updateInput('1')">1</button>
+                <button type="button" onclick="updateInput('2')">2</button>
+                <button type="button" onclick="updateInput('3')">3</button>
+                <button type="button" class="equals" onclick="calculate()">=</button>
+                <button type="button" onclick="updateInput('0')">0</button>
+                
+                <button type="button" onclick="updateInput('00')">00</button>
+                <button type="button" onclick="updateInput('.')">.</button>
+                
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        let inputString = "";
+        function updateInput(value) {
+            inputString += value;
+            document.calculator.input.value = inputString;
+            document.calculator.input.scrollLeft = document.calculator.input.scrollWidth;
+        }
+        function clearInput() {
+            inputString = "";
+            document.calculator.input.value = "";
+        }
+        function backspace() {
+            inputString = inputString.slice(0, -1);
+            document.calculator.input.value = inputString;
+        }
+        function calculate() {
+            try {
+                document.calculator.input.value = eval(inputString);
+                inputString = document.calculator.input.value;
+            } catch {
+                document.calculator.input.value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
